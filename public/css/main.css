@@ -11,3 +11,277 @@
   src: url('../fonts/SpaceMono-Bold.woff2') format('woff2'),
     url('../fonts/SpaceMono-Bold.woff') format('woff');
 }
+
+/*  */
+
+:root {
+  --max-width: 730px;
+  --padding: 1rem;
+  --width: min(var(--max-width), 100% - (var(--padding) * 2));
+
+  --ff-main: 'Space Mono', sans-serif;
+}
+
+.theme-light {
+  --body-bg: #f6f8ff;
+  --head-text: #222731;
+  --toggle-color: #697c9a;
+  --card-bg: #fefefe;
+  --search-text: #4b6a9b;
+
+  --btn-color: #0079ff;
+  --hover-clr: #222731;
+  --filter-hover: brightness(0) saturate(100%) invert(12%) sepia(11%)
+    saturate(1253%) hue-rotate(182deg) brightness(92%) contrast(91%);
+
+  --git-user: #2b3442;
+  --git-username: #0079ff;
+  --joined: #697c9a;
+  --bio: #4b6a9b;
+
+  --repos-title: #2b3442;
+  --repos-total: #4b6a9b;
+
+  --repos-bg: #f6f8ff;
+
+  --box-shadow: 0px 16px 30px -10px rgba(70, 96, 187, 19.86%);
+}
+
+.theme-dark {
+  --body-bg: #141d2f;
+  --head-text: #ffffff;
+  --toggle-color: #ffffff;
+  --card-bg: #1e2a47;
+  --search-text: #ffffff;
+  --black: #ffffff;
+  --follow-bg: #f6f8ff;
+  --follower-color: #ffffff;
+  --followTotal-color: #ffffff;
+  --social-color: #ffffff;
+
+  --btn-color: #0079ff;
+  --hover-clr: #90a4d4;
+
+  --filter-hover: brightness(0) saturate(100%) invert(84%) sepia(8%)
+    saturate(7041%) hue-rotate(186deg) brightness(89%) contrast(85%);
+
+  --box-shadow: none;
+}
+
+.theme-dark .dark-hidden {
+  display: none;
+}
+
+.theme-light .light-hidden {
+  display: none;
+}
+
+.light-hidden {
+  background: transparent;
+  border: none;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  /* color: #fff; */
+  filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%)
+    hue-rotate(272deg) brightness(111%) contrast(101%);
+  text-transform: uppercase;
+  width: 89px;
+
+  cursor: pointer;
+
+  transition: all ease 0.2s;
+}
+
+.light-hidden:hover {
+  /* color: #90a4d4; */
+  filter: brightness(0) saturate(100%) invert(70%) sepia(9%) saturate(1220%)
+    hue-rotate(185deg) brightness(91%) contrast(94%);
+}
+
+.dark-hidden {
+  background: transparent;
+  border: none;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  /* color: #4b6a9b; */
+  filter: brightness(0) saturate(100%) invert(70%) sepia(9%) saturate(1220%)
+    hue-rotate(185deg) brightness(91%) contrast(94%);
+  text-transform: uppercase;
+  width: 89px;
+
+  cursor: pointer;
+
+  transition: all ease 0.2s;
+}
+
+.dark-hidden:hover {
+  filter: brightness(0) saturate(100%) invert(13%) sepia(24%) saturate(507%)
+    hue-rotate(181deg) brightness(92%) contrast(94%);
+}
+
+/*  */
+
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+/*
+  2. Remove default margin
+*/
+* {
+  margin: 0;
+}
+/*
+  Typographic tweaks!
+  3. Add accessible line-height
+  4. Improve text rendering
+*/
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+/*
+  5. Improve media defaults
+*/
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+/*
+  6. Remove built-in form typography styles
+*/
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+/*
+  7. Avoid text overflows
+*/
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+/*
+  8. Create a root stacking context
+*/
+#root,
+#__next {
+  isolation: isolate;
+}
+
+/* RESET CSS END */
+
+body {
+  background-color: var(--body-bg);
+  font-family: var(--ff-main);
+}
+
+.heading-1 {
+  font-size: 26px;
+  font-weight: 700;
+
+  color: var(--head-text);
+}
+
+.btn {
+  /* width: 106px;
+  height: 50px; */
+
+  background-color: transparent;
+  border: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px 20px;
+  border-radius: 10px;
+}
+
+.btn-submit {
+  background-color: var(--btn-color);
+}
+
+/* Generic CSS END */
+
+.form-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  width: var(--max-width);
+  height: 40px;
+
+  margin-inline: auto;
+  padding-block-start: 5rem;
+}
+
+.form_section {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+
+  width: var(--max-width);
+  height: 69px;
+  margin: 3rem auto;
+
+  background-color: var(--card-bg);
+  border-radius: 15px;
+
+  box-shadow: var(--box-shadow);
+}
+
+.form_section form {
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-icon {
+  width: 20px;
+  height: 20px;
+}
+
+#username {
+  width: 254px;
+
+  margin-left: 20px;
+}
+
+.results {
+  width: var(--max-width);
+  height: 444px;
+
+  background-color: var(--card-bg);
+  border-radius: 15px;
+
+  box-shadow: var(--box-shadow);
+  margin-inline: auto;
+}

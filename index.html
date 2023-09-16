@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="theme-dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,10 +12,12 @@
     />
 
     <title>Frontend Mentor | GitHub user search app</title>
+
+    <link rel="stylesheet" href="./public/css/main.css" />
   </head>
   <body>
-    <header>
-      <div class="navbar-brand">devfinder</div>
+    <header class="form-header">
+      <div class="heading-1">devfinder</div>
 
       <div class="light-dark mode">
         <button
@@ -37,6 +39,27 @@
       </div>
     </header>
 
-    <main></main>
+    <main>
+      <section class="form_section">
+        <img src="./public/img/icon-search.svg" alt="" class="search-icon" />
+        <form action="/" method="post">
+          <div class="form-group">
+            <input
+              type="text"
+              name="username"
+              id="username"
+              placeholder="Search GitHub username..."
+            />
+            <small>No Result!</small>
+          </div>
+          <button class="btn btn-submit">Submit</button>
+        </form>
+      </section>
+      <section class="results">
+        <div class="results-header"></div>
+      </section>
+    </main>
+
+    <script src="./public/js/main.js"></script>
   </body>
 </html>
