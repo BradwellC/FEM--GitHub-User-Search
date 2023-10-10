@@ -20,6 +20,8 @@
   --width: min(var(--max-width), 100% - (var(--padding) * 2));
 
   --ff-main: 'Space Mono', sans-serif;
+
+  --width-desktop: 730px;
 }
 
 .theme-light {
@@ -28,15 +30,26 @@
   --toggle-color: #697c9a;
   --card-bg: #fefefe;
   --search-text: #4b6a9b;
+  --search-active: #222731;
 
   --btn-color: #0079ff;
   --hover-clr: #222731;
-  --filter-hover: brightness(0) saturate(100%) invert(70%) sepia(9%)
-    saturate(1220%) hue-rotate(185deg) brightness(91%) contrast(94%);
+
+  --info-heading: #2b3442;
+  --info-text: #4b6a9b;
+  --info-date: #697c9a;
+
+  --filter: brightness(0) saturate(100%) invert(52%) sepia(11%) saturate(1053%)
+    hue-rotate(178deg) brightness(89%) contrast(88%);
+  --filter-hover: brightness(0) saturate(100%) invert(11%) sepia(26%)
+    saturate(558%) hue-rotate(181deg) brightness(99%) contrast(90%);
 
   --repo-bg: #f6f8ff;
+  --repos-heading-clr: #4b6a9b;
+  --repos-number-clr: #2b3442;
 
   --box-shadow: 0px 16px 30px -10px rgba(70, 96, 187, 19.86%);
+  --unavaliable: #4b6a9b;
 }
 
 .theme-dark {
@@ -45,23 +58,26 @@
   --toggle-color: #ffffff;
   --card-bg: #1e2a47;
   --search-text: #ffffff;
-  --black: #ffffff;
-  --follow-bg: #f6f8ff;
-  --follower-color: #ffffff;
-  --followTotal-color: #ffffff;
-  --social-color: #ffffff;
+  --search-active: #fff;
 
   --btn-color: #0079ff;
   --hover-clr: #90a4d4;
 
   --repo-bg: #141d2f;
+  --repos-heading-clr: rgba(255, 255, 255, 0.5);
+  --repos-number-clr: #fff;
 
-  --filter: brightness(0) saturate(100%) invert(70%) sepia(9%) saturate(1220%)
-    hue-rotate(185deg) brightness(91%) contrast(94%);
-  --filter-hover: brightness(0) saturate(100%) invert(13%) sepia(24%)
-    saturate(507%) hue-rotate(181deg) brightness(92%) contrast(94%);
+  --info-heading: #fff;
+  --info-text: #fff;
+  --info-date: #fff;
+
+  --filter: brightness(0) saturate(100%) invert(100%) sepia(94%) saturate(25%)
+    hue-rotate(352deg) brightness(106%) contrast(105%);
+  --filter-hover: brightness(0) saturate(100%) invert(76%) sepia(4%)
+    saturate(4429%) hue-rotate(190deg) brightness(87%) contrast(89%);
 
   --box-shadow: none;
+  --unavaliable: rgba(255, 255, 255, 0.5);
 }
 
 .theme-dark .dark-hidden {
@@ -82,7 +98,7 @@
   align-items: center;
 
   /* color: #fff; */
-  filter: ;
+  filter: var(--filter);
   text-transform: uppercase;
   width: 89px;
 
@@ -106,7 +122,7 @@
   align-items: center;
 
   /* color: #4b6a9b; */
-  filter: ;
+  filter: var(--filter);
   text-transform: uppercase;
   width: 89px;
 
@@ -121,67 +137,121 @@
 
 /*  */
 
+/***
+    The new CSS reset - version 1.11 (last updated 20.9.2023)
+    GitHub page: https://github.com/elad2412/the-new-css-reset
+***/
+
 /*
-  1. Use a more-intuitive box-sizing model.
-*/
+    Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property
+    - The "symbol *" part is to solve Firefox SVG sprite bug
+    - The "html" element is excluded, otherwise a bug in Chrome breaks the CSS hyphens property (https://github.com/elad2412/the-new-css-reset/issues/36)
+ */
+*:where(
+    :not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)
+  ) {
+  all: unset;
+  display: revert;
+}
+
+/* Preferred box-sizing value */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
-/*
-  2. Remove default margin
-*/
-* {
-  margin: 0;
+
+/* Fix mobile Safari increase font-size on landscape mode */
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
 }
-/*
-  Typographic tweaks!
-  3. Add accessible line-height
-  4. Improve text rendering
-*/
-body {
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
+
+/* Reapply the pointer cursor for anchor tags */
+a,
+button {
+  cursor: revert;
 }
-/*
-  5. Improve media defaults
-*/
-img,
-picture,
-video,
-canvas,
-svg {
-  display: block;
-  max-width: 100%;
+
+/* Remove list styles (bullets/numbers) */
+ol,
+ul,
+menu,
+li {
+  list-style: none;
 }
-/*
-  6. Remove built-in form typography styles
-*/
+
+/* For images to not be able to exceed their container */
+img {
+  max-inline-size: 100%;
+  max-block-size: 100%;
+}
+
+/* removes spacing between cells in tables */
+table {
+  border-collapse: collapse;
+}
+
+/* Safari - solving issue when using user-select:none on the <body> text input doesn't working */
 input,
-button,
-textarea,
-select {
-  font: inherit;
+textarea {
+  -webkit-user-select: auto;
 }
-/*
-  7. Avoid text overflows
-*/
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+
+/* revert the 'white-space' property for textarea elements on Safari */
+textarea {
+  white-space: revert;
+}
+
+/* minimum style to allow to style meter element */
+meter {
+  -webkit-appearance: revert;
+  appearance: revert;
+}
+
+/* preformatted text - use only for this feature */
+:where(pre) {
+  all: revert;
+  box-sizing: border-box;
+}
+
+/* reset default text opacity of input placeholder */
+::placeholder {
+  color: unset;
+}
+
+/* remove default dot (•) sign */
+::marker {
+  content: initial;
+}
+
+/* fix the feature of 'hidden' attribute.
+   display:revert; revert to element instead of attribute */
+:where([hidden]) {
+  display: none;
+}
+
+/* revert for bug in Chromium browsers
+   - fix for the content editable attribute will work properly.
+   - webkit-user-select: auto; added for Safari in case of using user-select:none on wrapper element*/
+:where([contenteditable]:not([contenteditable='false'])) {
+  -moz-user-modify: read-write;
+  -webkit-user-modify: read-write;
   overflow-wrap: break-word;
+  -webkit-line-break: after-white-space;
+  -webkit-user-select: auto;
 }
-/*
-  8. Create a root stacking context
-*/
-#root,
-#__next {
-  isolation: isolate;
+
+/* apply back the draggable feature - exist only in Chromium and Safari */
+:where([draggable='true']) {
+  -webkit-user-drag: element;
+}
+
+/* Revert Modal native behavior */
+:where(dialog:modal) {
+  all: revert;
+  box-sizing: border-box;
 }
 
 /* RESET CSS END */
@@ -199,8 +269,8 @@ body {
 }
 
 .btn {
-  /* width: 106px;
-  height: 50px; */
+  width: 106px;
+  height: 50px;
 
   background-color: transparent;
   border: none;
@@ -215,6 +285,19 @@ body {
 
 .btn-submit {
   background-color: var(--btn-color);
+  color: #fff;
+
+  cursor: pointer;
+
+  transition: all ease 0.3s;
+}
+
+.btn-submit:hover {
+  background-color: #60abff;
+}
+
+.unavailable {
+  color: var(--unavaliable) !important;
 }
 
 /* Generic CSS END */
@@ -222,10 +305,10 @@ body {
 header {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 
-  /* width: var(--width); */
+  width: var(--width);
   /* width: 730px; */
   height: 40px;
 
@@ -234,14 +317,12 @@ header {
 }
 
 .form_section {
-  display: flex;
-  flex-direction: row;
-
-  align-items: center;
-
   width: var(--width);
   height: 69px;
   margin: 3rem auto;
+
+  display: flex;
+  align-items: center;
 
   background-color: var(--card-bg);
   border-radius: 15px;
@@ -249,11 +330,22 @@ header {
   box-shadow: var(--box-shadow);
 }
 
-.form_section form {
+.form-container {
   display: flex;
   flex-direction: row;
 
+  align-items: center;
   justify-content: space-between;
+
+  height: 55px;
+  width: 680px;
+
+  margin-left: 40px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: row;
   align-items: center;
 }
 
@@ -262,10 +354,38 @@ header {
   height: 20px;
 }
 
-#username {
-  width: 254px;
+input[type='text'] {
+  background: transparent;
+  border: none;
+  outline: none;
+
+  width: 300px;
 
   margin-left: 20px;
+  background-color: none;
+  border: none;
+
+  margin-right: 50px;
+
+  color: var(--search-text);
+
+  font-size: 18px;
+  line-height: 25px;
+}
+
+.btn-group {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+}
+
+.btn-group small {
+  padding-right: 20px;
+
+  color: #f74646;
+  font-size: 15px;
+  font-weight: 700;
 }
 
 .results {
@@ -305,6 +425,8 @@ header {
 
 .info-copy .heading-1 {
   grid-column: 1 / 2;
+
+  color: var(--info-heading);
 }
 
 .info-copy .git-account {
@@ -312,10 +434,21 @@ header {
   grid-row: 2 / 3;
 }
 
+.info-copy .info-date {
+  grid-column: 2 / 3;
+
+  display: flex;
+  justify-self: end;
+
+  color: var(--info-date);
+}
+
 .results-header--copy {
   margin: -35px 0 25px 158px;
 
   width: 480px;
+
+  color: var(--info-text);
 }
 
 .info-img {
@@ -323,8 +456,6 @@ header {
   height: 117px;
   border-radius: 50%;
   border: none;
-
-  background-color: red;
 }
 
 .results-repos {
@@ -344,7 +475,7 @@ header {
 
   justify-content: space-around;
 
-  padding: 10px 0;
+  padding: 15px 0;
 }
 
 .git-info {
@@ -357,9 +488,21 @@ header {
   margin-top: 20px;
 }
 
+.git-account {
+  color: #0079ff;
+  text-decoration: none;
+
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.website-link {
+  text-decoration: none;
+}
+
 .location,
 .twiiter-account,
-.git-link,
+.website-link,
 .company {
   display: flex;
   flex-direction: row;
@@ -374,7 +517,25 @@ header {
 
 .location img,
 .twiiter-account img,
-.git-link img,
+.website-link img,
 .company img {
   padding-right: 20px;
+}
+
+.repos h3,
+.followers h3,
+.following h3 {
+  font-size: 13px;
+  color: var(--repos-heading-clr);
+}
+
+.repos p,
+.followers p,
+.following p {
+  font-size: 22px;
+  color: var(--repos-number-clr);
+}
+
+.website-url {
+  font-size: 15px;
 }

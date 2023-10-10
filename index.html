@@ -41,32 +41,44 @@
 
     <main>
       <section class="form_section">
-        <img src="./public/img/icon-search.svg" alt="" class="search-icon" />
-        <form action="/" method="post">
+        <div class="form-container">
           <div class="form-group">
+            <img
+              src="./public/img/icon-search.svg"
+              alt=""
+              class="search-icon"
+            />
             <input
               type="text"
               name="username"
               id="username"
               placeholder="Search GitHub username..."
             />
-            <small>No Result!</small>
           </div>
-          <button class="btn btn-submit">Submit</button>
-        </form>
+          <div class="btn-group">
+            <!-- <small class="error"></small> -->
+            <button class="btn btn-submit" onclick="getDetails();">
+              Submit
+            </button>
+          </div>
+        </div>
       </section>
       <section class="results">
         <div class="results-container">
           <div class="results-header">
             <div class="results-header--info">
-              <img class="info-img" src="" alt="" />
+              <div class="profile" id="profile">
+                <img class="info-img" src="" alt="" />
+              </div>
               <div class="info-copy">
-                <h1 class="heading-l">The Octocat</h1>
-                <a class="git-account" href="http://">@octocat</a>
-                <p>Joined 25 Jan 2011</p>
+                <h1 class="heading-l" id="name">The Octocat</h1>
+                <a class="git-account" href="http://" id="accountName"
+                  >@octocat</a
+                >
+                <p class="info-date" id="date">Joined 25 Jan 2011</p>
               </div>
             </div>
-            <div class="results-header--copy">
+            <div class="results-header--copy" id="bio">
               Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec
               odio.
             </div>
@@ -76,31 +88,35 @@
             <div class="repo-container">
               <div class="repos">
                 <h3>Repos</h3>
-                <p>8</p>
+                <p id="repo">8</p>
               </div>
               <div class="followers">
                 <h3>Followers</h3>
-                <p>3938</p>
+                <p id="follower">3938</p>
               </div>
               <div class="following">
                 <h3>Following</h3>
-                <p>9</p>
+                <p id="following">9</p>
               </div>
             </div>
           </div>
 
           <div class="git-info">
-            <div class="location">
-              <img src="./public/img/icon-location.svg" alt="" /> Location
+            <div class="location" id="location">
+              <img src="./public/img/icon-location.svg" alt="" />
+              <p>Location</p>
             </div>
-            <div class="twiiter-account">
-              <img src="./public/img/icon-location.svg" alt="" /> Location
+            <div class="twiiter-account" id="twitter">
+              <img src="./public/img/icon-twitter.svg" alt="" />
+              <p>Location</p>
             </div>
-            <div class="git-link">
-              <img src="./public/img/icon-location.svg" alt="" /> Location
+            <div class="website-link" id="website">
+              <img src="./public/img/icon-website.svg" alt="" />
+              <a class="website-url" href="http://">Website</a>
             </div>
-            <div class="company">
-              <img src="./public/img/icon-location.svg" alt="" /> Location
+            <div class="company" id="company">
+              <img src="./public/img/icon-company.svg" alt="" />
+              <p>Location</p>
             </div>
           </div>
         </div>
