@@ -39,12 +39,32 @@ function getDetails() {
     response
       .json()
       .then((data) => {
-        document.getElementById('name').innerHTML = data.name;
-        document.getElementById('accountName').innerHTML = `
-        <a class="git-account" href="${data.html_url}">@${data.login}</a>
-      `;
+        //   document.getElementById('name').innerHTML = data.name;
+        //   document.getElementById('accountName').innerHTML = `
 
-        document.getElementById('date').innerHTML = `Joined ${data.created_at}`;
+        // `;
+
+        var dateString = data.created_at; // you have a date string in this format
+
+        // without the T00:00:00 the Date would be UTC
+        // and Western hemisphere dates will be a day out
+        options = {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        };
+        // console.log(newDate.toLocaleString('en-GB', options));
+
+        var newDate = new Date(dateString).toLocaleString('en-GB', options); // force LOCAL time,
+        // en-US, the only format that does Month Day, Year
+
+        document.getElementById('info-content').innerHTML = `
+          <h1 class="heading-1" id="name">${data.name}</h1>
+          <a class="git-account" href="${data.html_url}">@${data.login}</a>
+          <p class="info-date" id="date">Joined ${newDate}</p>
+        `;
+
+        // document.getElementById('date').innerHTML = `Joined ${data.created_at}`;
 
         // document.getElementById('date').innerHTML = new Date().toDateString();
 
